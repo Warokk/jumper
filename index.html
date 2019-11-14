@@ -59,11 +59,11 @@
 		</div>
 
 		<script src="three/build/three.js"></script>
+		<script src="three/examples/js/loaders/GLTFLoader.js"></script>
 		<script type="module">
 
 
 			import { PointerLockControls } from './js/controls/PointerLockControls.js';
-
 			var camera, scene, renderer, controls;
 
 			var objects = [];
@@ -136,6 +136,27 @@
 				
 
 
+				var gltfLoader = new THREE.GLTFLoader();
+				gltfLoader.load('./obj/house/house.gltf',function(gltf){
+					gltf.scene.position.x = 20;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 0;
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/house.gltf',function(gltf){
+					gltf.scene.position.x = 70;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 0;
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/house.gltf',function(gltf){
+					gltf.scene.position.x = 120;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 0;
+					scene.add(gltf.scene);
+				});
+				//routes
+				
 				//renderer
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
