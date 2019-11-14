@@ -90,16 +90,17 @@
 				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.y = 10;
 
+				// Environement
 				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xffffff );
-				scene.fog = new THREE.Fog( 0xffffff, 0, 750 );
-
+				scene.background = new THREE.Color( 0x87d7ee );
+				scene.fog = new THREE.Fog( 0x4DC8F0, 0, 750 );
 				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
 				light.position.set( 0.5, 1, 0.75 );
 				scene.add( light );
 
 				controls = new PointerLockControls( camera, document.body );
 
+				// Control du joueur
 				PlayerControls();
 
 				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
@@ -109,9 +110,13 @@
 				var floorGeometry = new THREE.PlaneBufferGeometry( 2000, 2000, 100, 100 );
 				floorGeometry.rotateX( - Math.PI / 2 );
 				var position = floorGeometry.attributes.position;
-				var floorMaterial = new THREE.MeshBasicMaterial( { wireframe: false, color: "#078446", } );
+				var floorMaterial = new THREE.MeshBasicMaterial( { wireframe: false, color: "#007549", } );
 				var floor = new THREE.Mesh( floorGeometry, floorMaterial );
 				scene.add( floor );
+
+				//Maisons
+
+
 
 
 				//renderer
@@ -223,27 +228,27 @@
 
 					switch ( event.keyCode ) {
 
-						case 38: // up
-						case 90: // z
+						case 38: 
+						case 90: 
 							moveForward = true;
 							break;
 
-						case 37: // left
-						case 81: // q
+						case 37: 
+						case 81: 
 							moveLeft = true;
 							break;
 
-						case 40: // down
-						case 83: // s
+						case 40: 
+						case 83: 
 							moveBackward = true;
 							break;
 
-						case 39: // right
-						case 68: // d
+						case 39: 
+						case 68: 
 							moveRight = true;
 							break;
 
-						case 32: // space
+						case 32: 
 							if ( canJump === true ) velocity.y += 250;
 							canJump = false;
 							break;
@@ -256,23 +261,23 @@
 
 					switch ( event.keyCode ) {
 
-						case 38: // up
-						case 90: // z
+						case 38: 
+						case 90: 
 							moveForward = false;
 							break;
 
-						case 37: // left
-						case 81: // q
+						case 37: 
+						case 81: 
 							moveLeft = false;
 							break;
 
-						case 40: // down
-						case 83: // s
+						case 40: 
+						case 83: 
 							moveBackward = false;
 							break;
 
-						case 39: // right
-						case 68: // d
+						case 39: 
+						case 68: 
 							moveRight = false;
 							break;
 
