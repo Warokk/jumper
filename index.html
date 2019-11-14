@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js - pointerlock controls</title>
+		<title>South Park</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link type="text/css" rel="stylesheet" href="main.css">
@@ -48,20 +48,20 @@
 		<div id="blocker">
 
 			<div id="instructions">
-				<span style="font-size:36px">Click to play</span>
+				<span style="font-size:36px">Cliquer pour jouer</span>
 				<br /><br />
-				Move: WASD<br/>
-				Jump: SPACE<br/>
-				Look: MOUSE
+				Move: ZQSD<br/>
+				Jump: ESPACE<br/>
+				Look: SOURIS
 			</div>
 
 		</div>
 
+		<script src="three/build/three.js"></script>
 		<script type="module">
 
-			import * as THREE from './three/build/three.module.js';
 
-			import { PointerLockControls } from './jsm/controls/PointerLockControls.js';
+			import { PointerLockControls } from './js/controls/PointerLockControls.js';
 
 			var camera, scene, renderer, controls;
 
@@ -99,94 +99,7 @@
 
 				controls = new PointerLockControls( camera, document.body );
 
-				var blocker = document.getElementById( 'blocker' );
-				var instructions = document.getElementById( 'instructions' );
-
-				instructions.addEventListener( 'click', function () {
-
-					controls.lock();
-
-				}, false );
-
-				controls.addEventListener( 'lock', function () {
-
-					instructions.style.display = 'none';
-					blocker.style.display = 'none';
-
-				} );
-
-				controls.addEventListener( 'unlock', function () {
-
-					blocker.style.display = 'block';
-					instructions.style.display = '';
-
-				} );
-
-				scene.add( controls.getObject() );
-
-				var onKeyDown = function ( event ) {
-
-					switch ( event.keyCode ) {
-
-						case 38: // up
-						case 87: // w
-							moveForward = true;
-							break;
-
-						case 37: // left
-						case 65: // a
-							moveLeft = true;
-							break;
-
-						case 40: // down
-						case 83: // s
-							moveBackward = true;
-							break;
-
-						case 39: // right
-						case 68: // d
-							moveRight = true;
-							break;
-
-						case 32: // space
-							if ( canJump === true ) velocity.y += 350;
-							canJump = false;
-							break;
-
-					}
-
-				};
-
-				var onKeyUp = function ( event ) {
-
-					switch ( event.keyCode ) {
-
-						case 38: // up
-						case 87: // w
-							moveForward = false;
-							break;
-
-						case 37: // left
-						case 65: // a
-							moveLeft = false;
-							break;
-
-						case 40: // down
-						case 83: // s
-							moveBackward = false;
-							break;
-
-						case 39: // right
-						case 68: // d
-							moveRight = false;
-							break;
-
-					}
-
-				};
-
-				document.addEventListener( 'keydown', onKeyDown, false );
-				document.addEventListener( 'keyup', onKeyUp, false );
+				PlayerControls();
 
 				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
 
@@ -199,17 +112,7 @@
 
 				var position = floorGeometry.attributes.position;
 
-				for ( var i = 0, l = position.count; i < l; i ++ ) {
-
-					vertex.fromBufferAttribute( position, i );
-
-					vertex.x += Math.random() * 20 - 10;
-					vertex.y += Math.random() * 2;
-					vertex.z += Math.random() * 20 - 10;
-
-					position.setXYZ( i, vertex.x, vertex.y, vertex.z );
-
-				}
+				
 
 				floorGeometry = floorGeometry.toNonIndexed(); // ensure each face has unique vertices
 
@@ -282,6 +185,97 @@
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
+			}
+
+			function PlayerControls(){
+				var blocker = document.getElementById( 'blocker' );
+				var instructions = document.getElementById( 'instructions' );
+
+				instructions.addEventListener( 'click', function () {
+
+					controls.lock();
+
+				}, false );
+
+				controls.addEventListener( 'lock', function () {
+
+					instructions.style.display = 'none';
+					blocker.style.display = 'none';
+
+				} );
+
+				controls.addEventListener( 'unlock', function () {
+
+					blocker.style.display = 'block';
+					instructions.style.display = '';
+
+				} );
+
+				scene.add( controls.getObject() );
+
+				var onKeyDown = function ( event ) {
+
+					switch ( event.keyCode ) {
+
+						case 38: // up
+						case 90: // z
+							moveForward = true;
+							break;
+
+						case 37: // left
+						case 81: // q
+							moveLeft = true;
+							break;
+
+						case 40: // down
+						case 83: // s
+							moveBackward = true;
+							break;
+
+						case 39: // right
+						case 68: // d
+							moveRight = true;
+							break;
+
+						case 32: // space
+							if ( canJump === true ) velocity.y += 250;
+							canJump = false;
+							break;
+
+					}
+
+				};
+
+				var onKeyUp = function ( event ) {
+
+					switch ( event.keyCode ) {
+
+						case 38: // up
+						case 90: // z
+							moveForward = false;
+							break;
+
+						case 37: // left
+						case 81: // q
+							moveLeft = false;
+							break;
+
+						case 40: // down
+						case 83: // s
+							moveBackward = false;
+							break;
+
+						case 39: // right
+						case 68: // d
+							moveRight = false;
+							break;
+
+					}
+
+				};
+
+				document.addEventListener( 'keydown', onKeyDown, false );
+				document.addEventListener( 'keyup', onKeyUp, false );
 			}
 
 			function animate() {

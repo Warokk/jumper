@@ -1,8 +1,3 @@
-/**
- * @author mrdoob / http://mrdoob.com/
- * @author Mugen87 / https://github.com/Mugen87
- */
-
 import {
 	Euler,
 	EventDispatcher,
@@ -12,18 +7,11 @@ import {
 var PointerLockControls = function ( camera, domElement ) {
 
 	if ( domElement === undefined ) {
-
-		console.warn( 'THREE.PointerLockControls: The second parameter "domElement" is now mandatory.' );
 		domElement = document.body;
-
 	}
 
 	this.domElement = domElement;
 	this.isLocked = false;
-
-	//
-	// internals
-	//
 
 	var scope = this;
 
