@@ -119,9 +119,21 @@
 				//Maisons
 				var gltfLoader = new THREE.GLTFLoader();
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
-					gltf.scene.position.x = 25;
-					gltf.scene.position.y = 25;
-					gltf.scene.position.z = 3;
+					gltf.scene.position.x = 20;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 0;
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/house.gltf',function(gltf){
+					gltf.scene.position.x = 70;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 0;
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/house.gltf',function(gltf){
+					gltf.scene.position.x = 120;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
 				});
 				//routes
