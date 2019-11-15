@@ -76,8 +76,11 @@
 			var camera, scene, renderer, controls;
 
 			var objects = [];
+			var cameraMesh = null;
+			
 
 			var raycaster;
+			var collidableMeshList=[];
 
 			var moveForward = false;
 			var moveBackward = false;
@@ -122,8 +125,15 @@
 
 				raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 );
 
-				// Sol
+				var geometryCameraMesh = new THREE.BoxGeometry();
+				var materialCameraMesh = new THREE.MeshBasicMaterial({wireframe:false});
+				cameraMesh = new THREE.Mesh(geometryCameraMesh, materialCameraMesh);
+				cameraMesh.position.x = camera.position.x;
+				cameraMesh.position.y = camera.position.y;
+				cameraMesh.position.z = camera.position.z;
+				scene.add(cameraMesh);
 
+				// Sol
 				var floorGeometry = new THREE.PlaneBufferGeometry( 2000, 2000, 100, 100 );
 				floorGeometry.rotateX( - Math.PI / 2 );
 				var floorMaterial = new THREE.MeshBasicMaterial( { wireframe: false, color: "#007549", } );
@@ -142,6 +152,7 @@
 					gltf.scene.position.x = 0;
 					gltf.scene.position.y = -1;
 					gltf.scene.position.z = 0;
+					collidableMeshList.push(gltf.asset);
 					scene.add(gltf.scene);
 				});
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
@@ -337,6 +348,19 @@
 
 				// #endregion
 
+				//collision
+				for (var vertexIndex = 0; vertexIndex < cameraMesh.geometry.vertices.length; vertexIndex++){       
+					var localVertex = cameraMesh.geometry.vertices[vertexIndex].clone();
+					var globalVertex = cameraMesh.matrix.multiplyVector3(localVertex);
+					var directionVector = globalVertex.sub( cameraMesh.position );
+
+					var ray = new THREE.Raycaster( cameraMesh.position, directionVector.clone().normalize() );
+					var collisionResults = ray.intersectObjects( collidableMeshList );
+					if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) 
+					{
+						console.log("JE VOUS ENMMERDE");
+					}
+				}
 				//renderer
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -405,8 +429,10 @@
 						controls.getObject().position.y = 10;
 
 						canJump = true;
-
 					}
+					cameraMesh.position.x = camera.position.x;
+					cameraMesh.position.y = camera.position.y;
+					cameraMesh.position.z = camera.position.z;
 
 					prevTime = time;
 
