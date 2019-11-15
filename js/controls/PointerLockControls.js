@@ -91,8 +91,7 @@ var PointerLockControls = function ( camera, domElement ) {
 
 	};
 
-	this.getObject = function () { // retaining this method for backward compatibility
-
+	this.getObject = function () { 
 		return camera;
 
 	};
