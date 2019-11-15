@@ -15,12 +15,17 @@
 			}
 
 			#instructions {
-				width: 100%;
-				height: 100%;
+				width: 50%;
+				height: 50%;
 
+				margin: 0 auto;
+				margin-top: 10%;
 				display: -webkit-box;
 				display: -moz-box;
 				display: box;
+
+				border: solid #45b1bb;
+				outline: solid #f4dc00;
 
 				-webkit-box-orient: horizontal;
 				-moz-box-orient: horizontal;
@@ -50,13 +55,14 @@
 		<div id="blocker">
 
 			<div id="instructions">
-				<span style="font-size: 70px;">SOUTH PARK</span><br /><br /><br /><br />
-				<span style="font-size:36px;">Cliquer pour jouer</span>
+				<span style="font-size: 70px;border: double; padding: 10px;">SOUTH PARK</span><br /><br /><br /><br />
+				<span style="font-size:36px; text-decoration:underline;">Cliquer pour jouer</span>
 				<br /><br />
 				Se déplacer : ZQSD<br/>
 				Sauter : ESPACE<br/>
 				Regarder autour de soi : SOURIS<br/>
-				Pause : Alt, Echap
+				Pause : Alt, Echap<br/>
+				Sons : &,é,",' ...
 			</div>
 
 		</div>
@@ -306,6 +312,10 @@
 						case 50:
 							PlayAudio('sounds/je-vous-emmerde-et-je-rentre-a-ma-maison.mp3');
 							camera.position.y = 2500;
+							break;
+
+						case 51:
+							PlayAudio('sounds/oh-alerte-au-gogol.mp3');
 							break;
 					}
 
