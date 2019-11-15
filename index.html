@@ -16,7 +16,7 @@
 
 			#instructions {
 				width: 50%;
-				height: 50%;
+				height: 65%;
 
 				margin: 0 auto;
 				margin-top: 10%;
@@ -139,24 +139,76 @@
 
 				var gltfLoader = new THREE.GLTFLoader();
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
-					gltf.scene.position.x = 20;
+					gltf.scene.position.x = 0;
 					gltf.scene.position.y = -1;
 					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
 				});
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
-					gltf.scene.position.x = 70;
+					gltf.scene.position.x = 150;
 					gltf.scene.position.y = -1;
 					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
 				});
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
-					gltf.scene.position.x = 120;
+					gltf.scene.position.x = 300;
 					gltf.scene.position.y = -1;
 					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
 				});
+				//garages
+				gltfLoader.load('./obj/house/garage.gltf',function(gltf){
+					gltf.scene.position.x = 50;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 5;
+					gltf.scene.scale.set(0.007,0.01,0.003);
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/garage_door.gltf',function(gltf){
+					gltf.scene.position.x = 50;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 15;
+					gltf.scene.scale.set(0.23,0.25,0.3);
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/garage.gltf',function(gltf){
+					gltf.scene.position.x = 200;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 5;
+					gltf.scene.scale.set(0.007,0.01,0.003);
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/garage_door.gltf',function(gltf){
+					gltf.scene.position.x = 200;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 15;
+					gltf.scene.scale.set(0.23,0.25,0.3);
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/garage.gltf',function(gltf){
+					gltf.scene.position.x = 350;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 5;
+					gltf.scene.scale.set(0.007,0.01,0.003);
+					scene.add(gltf.scene);
+				});
+				gltfLoader.load('./obj/house/garage_door.gltf',function(gltf){
+					gltf.scene.position.x = 350;
+					gltf.scene.position.y = -1;
+					gltf.scene.position.z = 15;
+					gltf.scene.scale.set(0.23,0.25,0.3);
+					scene.add(gltf.scene);
+				});
+
 				//routes
+				gltfLoader.load('./obj/road/road.gltf',function(gltf){
+					gltf.scene.position.x = 150;
+					gltf.scene.position.y = 0;
+					gltf.scene.position.z = 75;
+					gltf.scene.scale.set(0.05,0.01,0.05);
+					gltf.scene.rotation.y = Math.PI / 2;;
+					scene.add(gltf.scene);
+				});
 				
 				//renderer
 
