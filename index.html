@@ -15,12 +15,17 @@
 			}
 
 			#instructions {
-				width: 100%;
-				height: 100%;
+				width: 50%;
+				height: 50%;
 
+				margin: 0 auto;
+				margin-top: 10%;
 				display: -webkit-box;
 				display: -moz-box;
 				display: box;
+
+				border: solid #45b1bb;
+				outline: solid #f4dc00;
 
 				-webkit-box-orient: horizontal;
 				-moz-box-orient: horizontal;
@@ -40,6 +45,8 @@
 				font-size: 14px;
 				line-height: 24px;
 
+				background-color: rgb(192, 21, 21);
+
 				cursor: pointer;
 			}
 		</style>
@@ -48,12 +55,14 @@
 		<div id="blocker">
 
 			<div id="instructions">
-				<span style="font-size:36px;">Cliquer pour jouer</span>
+				<span style="font-size: 70px;border: double; padding: 10px;">SOUTH PARK</span><br /><br /><br /><br />
+				<span style="font-size:36px; text-decoration:underline;">Cliquer pour jouer</span>
 				<br /><br />
 				Se déplacer : ZQSD<br/>
 				Sauter : ESPACE<br/>
 				Regarder autour de soi : SOURIS<br/>
-				Pause : Alt, Echap
+				Pause : Alt, Echap<br/>
+				Sons : &,é,",' ...
 			</div>
 
 		</div>
@@ -76,7 +85,7 @@
 			var moveRight = false;
 			var canJump = false;
 
-			var icosa = null;
+			var listener = null;
 
 			var prevTime = performance.now();
 			var velocity = new THREE.Vector3();
@@ -94,15 +103,17 @@
 				camera.position.x = 0;
 				camera.position.z = 0;
 
+				listener = new THREE.AudioListener();
+				camera.add(listener);
+
 				// Environement
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0x87d7ee );
 				scene.fog = new THREE.Fog( 0x4DC8F0, 0, 1000 );
-                //scene.add( new THREE.AmbientLight( 0x404040 ) );
-                
-                var light = new THREE.DirectionalLight( 0xffffff  , 0.5 );
-                light.position.set( 0, 0, 30 );
-                scene.add( light );
+				var light = new THREE.HemisphereLight( 0xeeeeff, 0x777788, 0.75 );
+				light.position.set( 0.5, 1, 0.75 );
+				scene.add( light );
+
 
 				controls = new PointerLockControls( camera, document.body );
 
@@ -120,7 +131,7 @@
 				var floor = new THREE.Mesh( floorGeometry, floorMaterial );
 				scene.add( floor );
 
-				//Maisons
+				//Bordures
 
 				var colines = new THREE.IcosahedronGeometry(300,2);
 
@@ -135,7 +146,10 @@
 					scene.add(randomColine);
 					objects.push(randomColine);
 				}
-                
+
+				
+				//Maisons
+
 				var gltfLoader = new THREE.GLTFLoader();
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
 					gltf.scene.position.x = 0;
@@ -287,10 +301,22 @@
 							break;
 
 						case 32: 
-							if ( canJump === true ) velocity.y += 250;
+							if ( canJump === true ) velocity.y += 150;
 							canJump = false;
 							break;
 
+						case 49:	
+							PlayAudio('sounds/on-va-casser-du-pd.mp3');
+							break;
+
+						case 50:
+							PlayAudio('sounds/je-vous-emmerde-et-je-rentre-a-ma-maison.mp3');
+							camera.position.y = 2500;
+							break;
+
+						case 51:
+							PlayAudio('sounds/oh-alerte-au-gogol.mp3');
+							break;
 					}
 
 				};
@@ -325,6 +351,16 @@
 
 				document.addEventListener( 'keydown', onKeyDown, false );
 				document.addEventListener( 'keyup', onKeyUp, false );
+			}
+
+			function PlayAudio(path){
+				var sound = new THREE.Audio(listener);
+				var audioLoader = new THREE.AudioLoader();
+				audioLoader.load( path, function( buffer ) {
+				sound.setBuffer( buffer );
+				sound.setLoop( false );
+				sound.setVolume( 1 );
+				sound.play();});
 			}
 
 		</script>
