@@ -100,8 +100,8 @@
 
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.01	, 1000 );
 				camera.position.y = 10;
-				camera.position.x = 0;
-				camera.position.z = 0;
+				camera.position.x = 6;
+				camera.position.z = 35;
 
 				listener = new THREE.AudioListener();
 				camera.add(listener);
@@ -135,7 +135,7 @@
 				GenerateBorders();
 
 				
-				//Maisons
+				// #region house
 
 				var gltfLoader = new THREE.GLTFLoader();
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
@@ -168,7 +168,10 @@
 					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
 				});
-				//garages
+
+				// #endregion
+
+				// #region garages
 				gltfLoader.load('./obj/house/garage.gltf',function(gltf){
 					gltf.scene.position.x = 50;
 					gltf.scene.position.y = -1;
@@ -291,16 +294,47 @@
 					scene.add(gltf.scene);
 				});
 
-				// CARTMAN
-				var map = new THREE.TextureLoader().load( "./img/cartman_stick_of_truth.jpg" );
+				// #endregion
+
+				// #region persos
+				var map = new THREE.TextureLoader().load( "./img/Cartman.png" );
 				var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
 				var sprite = new THREE.Sprite( material );
-				sprite.scale.set(20,50,1);
-				sprite.position.x = 150;
+				sprite.scale.set(6,7,1);
+				sprite.position.x = 305;
 				sprite.position.z = 30;
-				sprite.position.y = 20;
+				sprite.position.y = 3;
 				scene.add( sprite );
 				
+				var map = new THREE.TextureLoader().load( "./img/kyle.png" );
+				var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
+				var sprite = new THREE.Sprite( material );
+				sprite.scale.set(9,10,1);
+				sprite.position.x = 600;
+				sprite.position.z = 30;
+				sprite.position.y = 3;
+				scene.add( sprite );
+
+				var map = new THREE.TextureLoader().load( "./img/Stan.png" );
+				var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
+				var sprite = new THREE.Sprite( material );
+				sprite.scale.set(12,10,1);
+				sprite.position.x = 450;
+				sprite.position.z = 30;
+				sprite.position.y = 4;
+				scene.add( sprite );
+
+				var map = new THREE.TextureLoader().load( "./img/butters.png" );
+				var material = new THREE.SpriteMaterial( { map: map, color: 0xffffff } );
+				var sprite = new THREE.Sprite( material );
+				sprite.scale.set(6,8,1);
+				sprite.position.x = 150;
+				sprite.position.z = 30;
+				sprite.position.y = 4;
+				scene.add( sprite );
+
+				// #endregion
+
 				//renderer
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
