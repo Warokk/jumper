@@ -98,8 +98,11 @@
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0x87d7ee );
 				scene.fog = new THREE.Fog( 0x4DC8F0, 0, 1000 );
-				scene.add( new THREE.AmbientLight( 0x404040 ) );
-
+                //scene.add( new THREE.AmbientLight( 0x404040 ) );
+                
+                var light = new THREE.DirectionalLight( 0xffffff  , 0.5 );
+                light.position.set( 0, 0, 30 );
+                scene.add( light );
 
 				controls = new PointerLockControls( camera, document.body );
 
@@ -132,25 +135,22 @@
 					scene.add(randomColine);
 					objects.push(randomColine);
 				}
-
-				
-
-
+                
 				var gltfLoader = new THREE.GLTFLoader();
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
-					gltf.scene.position.x = 20;
+					gltf.scene.position.x = 0;
 					gltf.scene.position.y = -1;
 					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
 				});
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
-					gltf.scene.position.x = 70;
+					gltf.scene.position.x = 100;
 					gltf.scene.position.y = -1;
 					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
 				});
 				gltfLoader.load('./obj/house/house.gltf',function(gltf){
-					gltf.scene.position.x = 120;
+					gltf.scene.position.x = 200;
 					gltf.scene.position.y = -1;
 					gltf.scene.position.z = 0;
 					scene.add(gltf.scene);
